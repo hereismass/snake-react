@@ -1,0 +1,24 @@
+@import "../../../styles/variables";
+
+.snakepart {
+  width: 30px;
+  height: 30px;
+  display: block;
+
+  &.purple {
+    background-color: $purple;
+  }
+
+  &.purple-light {
+    background-color: $purple-light;
+  }
+  &.purple-dark {
+    background-color: $purple-dark;
+  }
+  &.purple-lightest {
+    background-color: $purple-lightest;
+  }
+  &.purple-darkest {
+    background-color: $purple-darkest;
+  }
+}

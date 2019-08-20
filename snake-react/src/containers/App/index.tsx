@@ -1,22 +1,19 @@
-import React from "react";
-import "./styles.scss";
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import store from '../../store';
+import { bootstrapApp } from '../../store/actions';
+import styles from './styles.module.scss';
+
+import { SnakePart } from '../../components/atoms/SnakePart';
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    // Boostrap basic app needs
+    store.dispatch(bootstrapApp());
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <SnakePart color="purple" />
+    </Provider>
   );
 };
