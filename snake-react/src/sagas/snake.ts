@@ -13,6 +13,32 @@ export function* createSnake() {
   }
 }
 
-/*export function* snakeWatcher() {
-  //yield all([takeLatest(actions.GAME.RESTART, initializeBoard)]);
-}*/
+export function* moveSnake() {
+  const head = yield select(selectors.getSnakeHead);
+  const direction = yield select(selectors.getSnakeDirection);
+  let { nextX, nextY } = head.position;
+  switch (direction) {
+    case 'top':
+      nextY++;
+      break;
+    case 'bottom':
+      nextY--;
+      break;
+    case 'left':
+      nextX--;
+      break;
+    case 'right':
+      nextX++;
+      break;
+  }
+  const nextPositionType = yield select(selectors.isPositionUsed, { x: nextX, y: nextY });
+
+  // test next position
+  // if empty, add head remove tail
+  // if wall or snakepart, end game
+  // if mouse, add head, dont remove tail
+}
+
+export function* snakeWatcher() {
+  yield all([takeLatest(actions.SNAKE.MOVE_SNAKE, moveSnake)]);
+}

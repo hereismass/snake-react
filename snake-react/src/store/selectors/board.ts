@@ -32,19 +32,26 @@ export const getMouses: GetMouses = state => {
 type IsPositionUsed = OutputParametricSelector<
   IState,
   IPosition,
-  boolean,
-  (mouses: IMouse[], snakeParts: ISnakePart[], position: IPosition) => boolean
+  'empty' | 'snake' | 'mouse',
+  (mouses: IMouse[], snakeParts: ISnakePart[], position: IPosition) => 'empty' | 'snake' | 'mouse'
 >;
 export const isPositionUsed: IsPositionUsed = createSelector(
   [getMouses, getSnakeParts, (_: IState, position: IPosition) => position],
   (mouses: IMouse[], snakeParts: ISnakePart[], position: IPosition) => {
-    return (
+    if (
       mouses.some((m: IMouse) => {
         return m.position.x === position.x && m.position.y === position.y;
-      }) ||
+      })
+    ) {
+      return 'mouse';
+    }
+    if (
       snakeParts.some((s: ISnakePart) => {
         return s.position.x === position.x && s.position.y === position.y;
       })
-    );
+    ) {
+      return 'snake';
+    }
+    return 'empty';
   }
 );

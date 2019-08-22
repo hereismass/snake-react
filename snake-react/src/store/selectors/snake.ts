@@ -17,3 +17,15 @@ export const getSnakeParts: GetSnakeParts = state => state.snake.parts;
  */
 type GetSnake = Selector<IState, ISnake>;
 export const getSnake: GetSnake = state => state.snake;
+
+/**
+ * Returns the snake head
+ */
+type GetSnakeHead = Selector<IState, ISnakePart>;
+export const getSnakeHead: GetSnakeHead = state => state.snake.parts[0];
+
+/**
+ * Returns the snake head
+ */
+type GetSnakeDirection = Selector<IState, string>;
+export const getSnakeDirection: GetSnakeDirection = state => state.snake.direction;
