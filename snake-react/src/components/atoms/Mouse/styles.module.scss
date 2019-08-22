@@ -3,8 +3,8 @@
 
 .container {
   position: absolute;
+  display: block;
   width: calc(100% / #{$board-width});
   height: calc(100% / #{$board-height});
-  display: block;
-  background-color: $purple;
+  background-color: green;
 }

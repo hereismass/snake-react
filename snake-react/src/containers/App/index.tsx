@@ -4,7 +4,7 @@ import store from '../../store';
 import { bootstrapApp } from '../../store/actions';
 import styles from './styles.module.scss';
 
-import { SnakePart } from '../../components/atoms/SnakePart';
+import Board from '../../containers/Board';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -13,7 +13,9 @@ export const App: React.FC = () => {
   });
   return (
     <Provider store={store}>
-      <SnakePart color="purple" />
+      <div className={styles.app}>
+        <Board />
+      </div>
     </Provider>
   );
 };

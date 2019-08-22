@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.container {
+  height: 80vh;
+  width: 80vh;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $board-background;
+}

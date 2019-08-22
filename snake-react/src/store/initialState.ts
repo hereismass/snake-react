@@ -2,16 +2,22 @@ const initialState: IState = {
   app: {
     version: '0'
   },
-  world: {
-    height: 20,
-    width: 20,
-    shownMouses: 5,
+  board: {
+    size: {
+      height: 20,
+      width: 20
+    },
+    mousesLimit: 2,
     mouses: []
   },
   snake: {
     length: 4,
     direction: 'top',
-    body: []
+    parts: []
+  },
+  game: {
+    score: 0,
+    highScore: 0
   }
 };
 

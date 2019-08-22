@@ -1,12 +1,13 @@
 // colors
 $white: #fff;
-
-// snake parts colors
-$purple-darkest: #b816ff;
-$purple-dark: #c934e8;
 $purple: #e463ff;
-$purple-light: #e492e8;
-$purple-lightest: #ffc2e9;
+$green: green;
 
 // app
 $app-dark-background: #646464;
+$board-background: #dedede;
+
+// board
+// variables to put together with initialState
+$board-height: 20;
+$board-width: 20;

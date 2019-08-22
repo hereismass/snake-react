@@ -1,0 +1,13 @@
+@import './variables';
+
+// spacing
+@for $i from 0 through $board-width {
+  .x-#{$i} {
+    left: calc(#{$i} * 100% / #{$board-width});
+  }
+}
+@for $i from 0 through $board-height {
+  .y-#{$i} {
+    top: calc(#{$i} * 100% / #{$board-height});
+  }
+}
