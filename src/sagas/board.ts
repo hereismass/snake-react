@@ -50,6 +50,7 @@ export function* initializeBoard() {
 
 export function* gameInterval() {
   try {
+    yield delay(1000);
     while (true) {
       yield put(actions.moveSnake());
       yield delay(1000);
