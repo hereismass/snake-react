@@ -20,8 +20,8 @@ class Board extends React.Component<IBoardProps> {
     return (
       <div className={styles.container}>
         <Snake length={snake.length} direction={snake.direction} parts={snake.parts} />
-        {mouses.map(mouse => (
-          <Mouse position={mouse.position} color={mouse.color} />
+        {mouses.map((mouse, index) => (
+          <Mouse key={index} position={mouse.position} color={mouse.color} />
         ))}
       </div>
     );

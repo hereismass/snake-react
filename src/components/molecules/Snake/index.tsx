@@ -7,8 +7,8 @@ import { SnakePart } from '../../atoms';
 export const Snake: React.SFC<ISnake> = ({ length, direction, parts }) => {
   return (
     <>
-      {parts.map(snakePart => (
-        <SnakePart position={snakePart.position} />
+      {parts.map((snakePart, index) => (
+        <SnakePart key={index} position={snakePart.position} />
       ))}
     </>
   );

@@ -2,9 +2,9 @@ import { Action } from 'redux';
 
 export enum GAME {
   RESET_SCORE = 'GAME_RESET_SCORE',
-  RESTART = 'GAME_RESTART',
-  LAUNCH = 'GAME_LAUNCH',
-  STOP = 'GAME_STOP'
+  RESTART_GAME = 'GAME_RESTART_GAME',
+  LAUNCH_GAME = 'GAME_LAUNCH_GAME',
+  STOP_GAME = 'GAME_STOP_GAME'
 }
 
 export type ResetScore = Action<GAME.RESET_SCORE>;
@@ -12,17 +12,17 @@ export const resetScore = (): ResetScore => ({
   type: GAME.RESET_SCORE
 });
 
-export type Restart = Action<GAME.RESTART>;
-export const restart = (): Restart => ({
-  type: GAME.RESTART
+export type RestartGame = Action<GAME.RESTART_GAME>;
+export const restartGame = (): RestartGame => ({
+  type: GAME.RESTART_GAME
 });
 
-export type Launch = Action<GAME.LAUNCH>;
-export const launch = (): Launch => ({
-  type: GAME.LAUNCH
+export type LaunchGame = Action<GAME.LAUNCH_GAME>;
+export const launchGame = (): LaunchGame => ({
+  type: GAME.LAUNCH_GAME
 });
 
-export type Stop = Action<GAME.STOP>;
-export const stop = (): Stop => ({
-  type: GAME.STOP
+export type StopGame = Action<GAME.STOP_GAME>;
+export const stopGame = (): StopGame => ({
+  type: GAME.STOP_GAME
 });

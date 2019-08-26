@@ -12,7 +12,7 @@ const initialState: IState = {
   },
   snake: {
     length: 4,
-    direction: 'top',
+    direction: 'bottom',
     parts: []
   },
   game: {

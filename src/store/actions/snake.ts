@@ -2,7 +2,8 @@ import { Action } from 'redux';
 
 export enum SNAKE {
   CREATE_SNAKE_PART = 'SNAKE_CREATE_SNAKE_PART',
-  MOVE_SNAKE = 'SNAKE_MOVE_SNAKE'
+  MOVE_SNAKE = 'SNAKE_MOVE_SNAKE',
+  REMOVE_SNAKE_TAIL = 'SNAKE_REMOVE_SNAKE_TAIL'
 }
 
 export type CreateSnakePart = Action<SNAKE.CREATE_SNAKE_PART> & {
@@ -20,4 +21,9 @@ export const createSnakePart = (x: number, y: number, order: 'head' | 'tail'): C
 export type MoveSnake = Action<SNAKE.MOVE_SNAKE>;
 export const moveSnake = (): MoveSnake => ({
   type: SNAKE.MOVE_SNAKE
+});
+
+export type RemoveSnakeTail = Action<SNAKE.REMOVE_SNAKE_TAIL>;
+export const removeSnakeTail = (): RemoveSnakeTail => ({
+  type: SNAKE.REMOVE_SNAKE_TAIL
 });

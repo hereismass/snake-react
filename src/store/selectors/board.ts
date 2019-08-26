@@ -52,7 +52,7 @@ export const getPositionType: GetPositionType = createSelector(
     ) {
       return 'snake';
     }
-    if (position.x >= boardSize.width || position.y >= boardSize.height) {
+    if (position.x >= boardSize.width || position.x < 0 || position.y >= boardSize.height || position.y < 0) {
       return 'wall';
     }
     return 'empty';

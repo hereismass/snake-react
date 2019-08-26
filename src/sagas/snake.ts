@@ -4,9 +4,9 @@ import * as selectors from '../store/selectors';
 
 export function* createSnake() {
   // to put in constants
-  const snakeLength = yield select(selectors.getSnakeLength);
+  const snakeLength: number = yield select(selectors.getSnakeLength);
   const x: number = 4;
-  const y: number = 5;
+  const y: number = 7;
 
   for (let i = 0; i < snakeLength; i++) {
     yield put(actions.createSnakePart(x, y + i, 'tail'));
@@ -14,9 +14,11 @@ export function* createSnake() {
 }
 
 export function* moveSnake() {
-  const head = yield select(selectors.getSnakeHead);
-  const direction = yield select(selectors.getSnakeDirection);
-  let { nextX, nextY } = head.position;
+  const head: ISnakePart = yield select(selectors.getSnakeHead);
+  const direction: string = yield select(selectors.getSnakeDirection);
+  let { x: nextX, y: nextY }: IPosition = head.position;
+
+  console.log('mmm', direction, nextX, nextY);
   switch (direction) {
     case 'top':
       nextY++;
@@ -31,12 +33,21 @@ export function* moveSnake() {
       nextX++;
       break;
   }
-  const nextPositionType = yield select(selectors.getPositionType, { x: nextX, y: nextY });
-
-  // test next position
-  // if empty, add head remove tail
-  // if wall or snakepart, end game
-  // if mouse, add head, dont remove tail
+  const nextPositionType: IPositionType = yield select(selectors.getPositionType, { x: nextX, y: nextY });
+  switch (nextPositionType) {
+    case 'wall':
+    case 'snake':
+      // end game
+      yield put(actions.stopGame());
+      break;
+    case 'empty':
+      // remove tail
+      yield put(actions.removeSnakeTail());
+    case 'mouse':
+      // add head
+      yield put(actions.createSnakePart(nextX, nextY, 'head'));
+      break;
+  }
 }
 
 export function* snakeWatcher() {

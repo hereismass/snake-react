@@ -16,7 +16,13 @@ const snake: Reducer<IState['snake']> = (state = initialState.snake, action) => 
           parts: [{ position: { x: action.x, y: action.y } }, ...state.parts]
         };
       }
-
+    case SNAKE.REMOVE_SNAKE_TAIL:
+      const tempParts: ISnakePart[] = state.parts;
+      tempParts.pop();
+      return {
+        ...state,
+        parts: tempParts
+      }
     default:
       return state;
   }

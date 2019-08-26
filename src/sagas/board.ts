@@ -45,7 +45,7 @@ export function* initializeBoard() {
     yield call(createMouse);
   }
 
-  yield put(actions.launch());
+  yield put(actions.launchGame());
 }
 
 export function* gameInterval() {
@@ -66,14 +66,14 @@ export function* startGame() {
   const gameIntervalTask = yield fork(gameInterval);
 
   // wait for end of the game
-  yield take(actions.GAME.STOP);
+  yield take(actions.GAME.STOP_GAME);
   // cancel interval
   yield cancel(gameIntervalTask);
 }
 
 export function* boardWatcher() {
   yield all([
-    takeLatest(actions.GAME.RESTART, initializeBoard),
-    takeLatest(actions.GAME.LAUNCH, startGame)
+    takeLatest(actions.GAME.RESTART_GAME, initializeBoard),
+    takeLatest(actions.GAME.LAUNCH_GAME, startGame)
   ]);
 }
