@@ -3,6 +3,8 @@ interface IPosition {
   y: number;
 }
 
+type IPositionType = 'wall' | 'mouse' | 'snake' | 'empty';
+
 interface IMouse {
   position: IPosition;
   color: string;

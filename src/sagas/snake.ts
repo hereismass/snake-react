@@ -31,7 +31,7 @@ export function* moveSnake() {
       nextX++;
       break;
   }
-  const nextPositionType = yield select(selectors.isPositionUsed, { x: nextX, y: nextY });
+  const nextPositionType = yield select(selectors.getPositionType, { x: nextX, y: nextY });
 
   // test next position
   // if empty, add head remove tail

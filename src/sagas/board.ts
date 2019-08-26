@@ -24,9 +24,9 @@ export function* createMouse() {
   // to improve
   const color: string = 'green';
 
-  console.log('create mouse', yield select(selectors.isPositionUsed, { x, y }));
+  console.log('create mouse', yield select(selectors.getPositionType, { x, y }));
 
-  while ((yield select(selectors.isPositionUsed, { x, y })) !== 'empty') {
+  while ((yield select(selectors.getPositionType, { x, y })) !== 'empty') {
     x = generateRandomNumber(width);
     y = generateRandomNumber(height);
     console.log('woops already used. retrying', x, y);

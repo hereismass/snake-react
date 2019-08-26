@@ -29,15 +29,15 @@ export const getMouses: GetMouses = state => {
  * Returns if a position is used
  * We check if the position is already used by a snake part, then by mouses
  */
-type IsPositionUsed = OutputParametricSelector<
+type GetPositionType = OutputParametricSelector<
   IState,
   IPosition,
-  'empty' | 'snake' | 'mouse',
-  (mouses: IMouse[], snakeParts: ISnakePart[], position: IPosition) => 'empty' | 'snake' | 'mouse'
+  IPositionType,
+  (mouses: IMouse[], snakeParts: ISnakePart[], getBoardSize: IState['board']['size'], position: IPosition) => IPositionType
 >;
-export const isPositionUsed: IsPositionUsed = createSelector(
-  [getMouses, getSnakeParts, (_: IState, position: IPosition) => position],
-  (mouses: IMouse[], snakeParts: ISnakePart[], position: IPosition) => {
+export const getPositionType: GetPositionType = createSelector(
+  [getMouses, getSnakeParts, getBoardSize, (_: IState, position: IPosition) => position],
+  (mouses: IMouse[], snakeParts: ISnakePart[], boardSize: IState['board']['size'], position: IPosition) => {
     if (
       mouses.some((m: IMouse) => {
         return m.position.x === position.x && m.position.y === position.y;
@@ -51,6 +51,9 @@ export const isPositionUsed: IsPositionUsed = createSelector(
       })
     ) {
       return 'snake';
+    }
+    if (position.x >= boardSize.width || position.y >= boardSize.height) {
+      return 'wall';
     }
     return 'empty';
   }
