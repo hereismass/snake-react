@@ -3,12 +3,7 @@ import {
   call,
   put,
   select,
-  takeLatest,
-  fork,
-  take,
-  cancel,
-  delay,
-  cancelled
+  takeLatest
 } from 'redux-saga/effects';
 import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
@@ -48,33 +43,8 @@ export function* initializeBoard() {
   yield put(actions.launchGame());
 }
 
-export function* gameInterval() {
-  try {
-    yield delay(1000);
-    while (true) {
-      yield put(actions.moveSnake());
-      yield delay(1000);
-    }
-  } finally {
-    if (yield cancelled()) {
-      console.log('GAME STOPPED');
-    }
-  }
-}
-
-export function* startGame() {
-  // starts the game interval
-  const gameIntervalTask = yield fork(gameInterval);
-
-  // wait for end of the game
-  yield take(actions.GAME.STOP_GAME);
-  // cancel interval
-  yield cancel(gameIntervalTask);
-}
-
 export function* boardWatcher() {
   yield all([
-    takeLatest(actions.GAME.RESTART_GAME, initializeBoard),
-    takeLatest(actions.GAME.LAUNCH_GAME, startGame)
+    takeLatest(actions.GAME.RESTART_GAME, initializeBoard)
   ]);
 }

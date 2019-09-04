@@ -1,10 +1,16 @@
+
+/* General types */
 interface IPosition {
   x: number;
   y: number;
 }
 
 type IPositionType = 'wall' | 'mouse' | 'snake' | 'empty';
+type IDirection = 'top' | 'left' | 'bottom' | 'right';
 
+
+
+/* State types */
 interface IMouse {
   position: IPosition;
   color: string;
@@ -16,7 +22,8 @@ interface ISnakePart {
 
 interface ISnake {
   length: number;
-  direction: 'top' | 'left' | 'bottom' | 'right';
+  direction: IDirection;
+  newDirection: null | IDirection;
   parts: ISnakePart[];
 }
 

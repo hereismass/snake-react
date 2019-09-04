@@ -4,7 +4,13 @@ import styles from './styles.module.scss';
 
 import { SnakePart } from '../../atoms';
 
-export const Snake: React.SFC<ISnake> = ({ length, direction, parts }) => {
+interface ISnakeProps {
+  length: number;
+  direction: IDirection;
+  parts: ISnakePart[]
+}
+
+export const Snake: React.SFC<ISnakeProps> = ({ length, direction, parts }) => {
   return (
     <>
       {parts.map((snakePart, index) => (

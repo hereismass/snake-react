@@ -2,7 +2,13 @@ import classnames from 'classnames';
 import * as React from 'react';
 import styles from './styles.module.scss';
 
-export const Mouse: React.SFC<IMouse> = ({ position, color }) => {
+interface IMouseProps {
+  position: IPosition;
+  color: string;
+}
+
+
+export const Mouse: React.SFC<IMouseProps> = ({ position, color }) => {
   const className = classnames(
     styles.container,
     styles[`x-${position.x}`],
