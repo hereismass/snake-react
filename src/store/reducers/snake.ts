@@ -22,7 +22,33 @@ const snake: Reducer<IState['snake']> = (state = initialState.snake, action) => 
       return {
         ...state,
         parts: tempParts
+      };
+    case SNAKE.SET_SNAKE_NEW_DIRECTION:
+      // we do nothing if setting the same idrection or opposite
+      switch (state.direction) {
+        case 'top':
+        case 'bottom':
+          if (['top', 'bottom'].includes(action.direction)) {
+            return state;
+          }
+          break;
+        case 'left':
+        case 'right':
+          if (['left', 'right'].includes(action.direction)) {
+            return state;
+          }
+          break;
       }
+      return {
+        ...state,
+        newDirection: action.direction
+      };
+    case SNAKE.SET_SNAKE_DIRECTION:
+      return {
+        ...state,
+        direction: state.newDirection || state.direction,
+        newDirection: null
+      };
     default:
       return state;
   }
