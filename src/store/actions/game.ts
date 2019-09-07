@@ -4,12 +4,18 @@ export enum GAME {
   RESET_SCORE = 'GAME_RESET_SCORE',
   RESTART_GAME = 'GAME_RESTART_GAME',
   LAUNCH_GAME = 'GAME_LAUNCH_GAME',
-  STOP_GAME = 'GAME_STOP_GAME'
+  STOP_GAME = 'GAME_STOP_GAME',
+  INCREMENT_SCORE = 'GAME_INCREMENT_SCORE'
 }
 
 export type ResetScore = Action<GAME.RESET_SCORE>;
 export const resetScore = (): ResetScore => ({
   type: GAME.RESET_SCORE
+});
+
+export type IncrementScore = Action<GAME.INCREMENT_SCORE>;
+export const incrementScore = (): IncrementScore => ({
+  type: GAME.INCREMENT_SCORE
 });
 
 export type RestartGame = Action<GAME.RESTART_GAME>;

@@ -19,8 +19,6 @@ export function* createMouse() {
   // to improve
   const color: string = 'green';
 
-  console.log('create mouse', yield select(selectors.getPositionType, { x, y }));
-
   while ((yield select(selectors.getPositionType, { x, y })) !== 'empty') {
     x = generateRandomNumber(width);
     y = generateRandomNumber(height);
@@ -43,8 +41,19 @@ export function* initializeBoard() {
   yield put(actions.launchGame());
 }
 
+export function* eatMouse(action: actions.EatMouse) {
+  // remove eaten mouse
+  yield put(actions.removeMouse(action.position));
+  // add new mouse on the map
+  yield call(createMouse);
+  // increment score
+  yield put(actions.incrementScore());
+
+}
+
 export function* boardWatcher() {
   yield all([
-    takeLatest(actions.GAME.RESTART_GAME, initializeBoard)
+    takeLatest(actions.GAME.RESTART_GAME, initializeBoard),
+    takeLatest(actions.BOARD.EAT_MOUSE, eatMouse)
   ]);
 }

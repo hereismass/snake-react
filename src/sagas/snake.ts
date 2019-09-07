@@ -9,7 +9,7 @@ export function* createSnake() {
   const y: number = 7;
 
   for (let i = 0; i < snakeLength; i++) {
-    yield put(actions.createSnakePart(x, y + i, 'tail'));
+    yield put(actions.createSnakePart({x, y: y + i}, 'tail'));
   }
 }
 
@@ -18,7 +18,6 @@ export function* moveSnake() {
   const direction: string = yield select(selectors.getSnakeDirection);
   let { x: nextX, y: nextY }: IPosition = head.position;
 
-  console.log('mmm', direction, nextX, nextY);
   switch (direction) {
     case 'top':
       nextY++;
@@ -43,9 +42,13 @@ export function* moveSnake() {
     case 'empty':
       // remove tail
       yield put(actions.removeSnakeTail());
-    case 'mouse':
       // add head
-      yield put(actions.createSnakePart(nextX, nextY, 'head'));
+      yield put(actions.createSnakePart({x:nextX, y:nextY}, 'head'));
+      break;
+    case 'mouse':
+      // remove mouse
+      yield put(actions.eatMouse({x:nextX, y:nextY}));
+      yield put(actions.createSnakePart({x:nextX, y:nextY}, 'head'));
       break;
   }
 }

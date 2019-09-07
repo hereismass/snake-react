@@ -11,6 +11,11 @@ const board: Reducer<IState['board']> = (state = initialState.board, action) => 
       };
     case BOARD.REMOVE_ALL_MOUSES:
       return { ...state, mouses: [] };
+    case BOARD.REMOVE_MOUSE:
+      const mouses = state.mouses.filter(mouse => {
+        return mouse.position.x !== action.position.x || mouse.position.y !== action.position.y;
+      });
+      return { ...state, mouses: mouses };
     default:
       return state;
   }

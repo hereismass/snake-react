@@ -9,14 +9,12 @@ export enum SNAKE {
 }
 
 export type CreateSnakePart = Action<SNAKE.CREATE_SNAKE_PART> & {
-  x: number;
-  y: number;
+  position: IPosition;
   order: 'head' | 'tail';
 };
-export const createSnakePart = (x: number, y: number, order: 'head' | 'tail'): CreateSnakePart => ({
+export const createSnakePart = (position:IPosition, order: 'head' | 'tail'): CreateSnakePart => ({
   type: SNAKE.CREATE_SNAKE_PART,
-  x,
-  y,
+  position,
   order
 });
 

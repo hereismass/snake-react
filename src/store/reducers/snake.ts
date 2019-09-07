@@ -8,12 +8,12 @@ const snake: Reducer<IState['snake']> = (state = initialState.snake, action) => 
       if (action.order === 'tail') {
         return {
           ...state,
-          parts: [...state.parts, { position: { x: action.x, y: action.y } }]
+          parts: [...state.parts, { position: action.position }]
         };
       } else {
         return {
           ...state,
-          parts: [{ position: { x: action.x, y: action.y } }, ...state.parts]
+          parts: [{ position: action.position }, ...state.parts]
         };
       }
     case SNAKE.REMOVE_SNAKE_TAIL:
@@ -24,7 +24,7 @@ const snake: Reducer<IState['snake']> = (state = initialState.snake, action) => 
         parts: tempParts
       };
     case SNAKE.SET_SNAKE_NEW_DIRECTION:
-      // we do nothing if setting the same idrection or opposite
+      // we do nothing if setting the same direction or opposite
       switch (state.direction) {
         case 'top':
         case 'bottom':
